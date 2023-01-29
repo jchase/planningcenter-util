@@ -61,7 +61,7 @@
       bind:this={outputEl}
       bind:value={output}
       on:click={copyToClipboard}
-      class="border-2 border-gray-500 rounded-lg outline-none"
+      class="border-2 border-gray-500 rounded-lg outline-none font-mono"
       class:border-green-500={showClipboardStatus}
     />
   </div>
