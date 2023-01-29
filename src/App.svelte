@@ -4,14 +4,25 @@
   let showClipboardStatus = false;
 
   function handleTranslateContent(event) {
-    const codeElements = event.target.querySelectorAll(
+    const clonedNode = deepCloneNode(event.target);
+    const codeElements = clonedNode.querySelectorAll(
       "span:not(.chordsOnly) > span > code"
     );
     codeElements.forEach((code) => {
       code.textContent = "[" + code.textContent + "]";
     });
-    const content = event.target.innerText;
+    const content = clonedNode.innerText;
     output = content;
+  }
+
+  function deepCloneNode(node) {
+    const clonedNode = node.cloneNode();
+
+    node.childNodes.forEach((childNode) => {
+      clonedNode.appendChild(deepCloneNode(childNode));
+    });
+
+    return clonedNode;
   }
 
   function copyToClipboard() {
@@ -43,8 +54,8 @@
   }
 </script>
 
-<main class="p-10 h-screen">
-  <div class="grid grid-cols-2 gap-10 h-full">
+<main class="p-20 h-screen">
+  <div class="grid grid-cols-2 gap-x-20 h-full">
     <p class="font-bold">Paste your song from Song Select:</p>
     <p class="font-bold">
       Corrected output for Planning Center:
@@ -55,7 +66,7 @@
     <div
       on:keyup={handleTranslateContent}
       contenteditable="true"
-      class="border-2 rounded-lg text-2xl font-bold overflow-hidden outline-none"
+      class="border-2 rounded-lg text-2xl font-bold overflow-y-scroll outline-none"
     />
     <textarea
       bind:this={outputEl}
@@ -69,6 +80,6 @@
 
 <style>
   .grid {
-    grid-template-rows: 0.5rem 1fr;
+    grid-template-rows: 2rem 1fr;
   }
 </style>
