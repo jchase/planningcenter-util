@@ -65,7 +65,7 @@
 
 <main class="p-20 h-screen">
   <div class="grid grid-cols-2 gap-x-20 h-full">
-    <p class="font-bold">Paste your song from Song Select:</p>
+    <p class="font-bold">Paste your song from SongSelect:</p>
     <p class="font-bold">
       Corrected output for Planning Center:
       <span class:hidden={!showClipboardStatus} class="text-green-600"
