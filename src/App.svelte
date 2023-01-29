@@ -1,7 +1,16 @@
 <script lang="ts">
+  let inputEl;
   let output = "";
   let outputEl;
   let showClipboardStatus = false;
+
+  function handleSelectInitial(event) {
+    const range = document.createRange();
+    range.selectNodeContents(inputEl);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
 
   function handleTranslateContent(event) {
     const clonedNode = deepCloneNode(event.target);
@@ -64,7 +73,9 @@
       >
     </p>
     <div
+      bind:this={inputEl}
       on:keyup={handleTranslateContent}
+      on:click={handleSelectInitial}
       contenteditable="true"
       class="border-2 rounded-lg text-2xl font-bold overflow-y-scroll outline-none"
     />
