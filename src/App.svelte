@@ -13,15 +13,17 @@
   }
 
   function handleTranslateContent(event) {
-    const clonedNode = deepCloneNode(event.target);
-    const codeElements = clonedNode.querySelectorAll(
-      "span:not(.chordsOnly) > span > code"
-    );
-    codeElements.forEach((code) => {
-      code.textContent = "[" + code.textContent + "]";
-    });
-    const content = clonedNode.innerText;
-    output = content;
+    window.setTimeout(function () {
+      const clonedNode = deepCloneNode(event.target);
+      const codeElements = clonedNode.querySelectorAll(
+        "span:not(.chordsOnly) > span > code"
+      );
+      codeElements.forEach((code) => {
+        code.textContent = "[" + code.textContent + "]";
+      });
+      const content = clonedNode.innerText;
+      output = content;
+    }, 0);
   }
 
   function deepCloneNode(node) {
@@ -75,6 +77,7 @@
     <div
       bind:this={inputEl}
       on:keyup={handleTranslateContent}
+      on:paste={handleTranslateContent}
       on:click={handleSelectInitial}
       contenteditable="true"
       class="border-2 rounded-lg text-2xl font-bold overflow-y-scroll outline-none"
