@@ -4,7 +4,9 @@
   let showClipboardStatus = false;
 
   function handleTranslateContent(event) {
-    const codeElements = event.target.querySelectorAll("code");
+    const codeElements = event.target.querySelectorAll(
+      "span:not(.chordsOnly) > span > code"
+    );
     codeElements.forEach((code) => {
       code.textContent = "[" + code.textContent + "]";
     });
