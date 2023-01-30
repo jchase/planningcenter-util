@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getTranslatedContent } from "./lib/util/util";
   let inputEl;
   let output = "";
   let outputEl;
@@ -14,26 +15,8 @@
 
   function handleTranslateContent(event) {
     window.setTimeout(function () {
-      const clonedNode = deepCloneNode(event.target);
-      const codeElements = clonedNode.querySelectorAll(
-        "span:not(.chordsOnly) > span > code"
-      );
-      codeElements.forEach((code) => {
-        code.textContent = "[" + code.textContent + "]";
-      });
-      const content = clonedNode.innerText;
-      output = content;
+      output = getTranslatedContent(event.target);
     }, 0);
-  }
-
-  function deepCloneNode(node) {
-    const clonedNode = node.cloneNode();
-
-    node.childNodes.forEach((childNode) => {
-      clonedNode.appendChild(deepCloneNode(childNode));
-    });
-
-    return clonedNode;
   }
 
   function copyToClipboard() {
